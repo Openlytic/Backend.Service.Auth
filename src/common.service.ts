@@ -6,6 +6,7 @@ const secret = (): string => process.env.JWT_SECRET || 'dev-openlytic-jwt'
 export const getRandomNumber = (length: number): string => {
   const characters = '0123456789'
   let result = ''
+
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length)
     result += characters.charAt(randomIndex)
@@ -16,6 +17,7 @@ export const getRandomNumber = (length: number): string => {
 export const getRandomString = (length: number): string => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let result = ''
+
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length)
     result += characters.charAt(randomIndex)
@@ -26,11 +28,13 @@ export const getRandomString = (length: number): string => {
 export const checkPasswordPolicy = (password: string): boolean => {
   if (password?.length < 8) return false
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-+_!@#$%^&*.,?]).+$/
+
   return regex.test(password)
 }
 
 export const compareHashPassword = (str = '', hashStr?: string | null): boolean => {
   if (!str || !hashStr) return false
+
   return bcrypt.compareSync(str, hashStr)
 }
 
@@ -70,6 +74,7 @@ export interface VerifyJWTResult {
 export const verifyJWTToken = (token: string): VerifyJWTResult => {
   try {
     const payload = jwt.verify(token, secret()) as JWTClaims
+
     return { message: 'TOKEN_IS_VERIFIED', payload, success: true }
   } catch (err) {
     return {
@@ -104,6 +109,7 @@ export const validateProps = (fields: ValidationField[], body: object = {}): voi
 
   const invalidFields: string[] = []
   const missingFields: string[] = []
+
   for (const { field, required, type } of fields) {
     if (typeof record[field] !== 'undefined' && typeof record[field] !== type) {
       invalidFields.push(field)
@@ -126,9 +132,8 @@ export const getAppName = (): string => process.env.COPILOT_APPLICATION_NAME || 
 export const getAppDomain = (): string => {
   const domainMaps: Record<string, string> = {
     openlytic: 'openlytic.app',
-    gain: 'gain.io',
-    payrun: 'payrun.app',
-    easydesk: 'easydesk.app'
+    'openlytic-dev': 'openlytic.dev',
+    'openlytic-staging': 'openlytic.staging'
   }
   return domainMaps[getAppName()] || 'openlytic.app'
 }
