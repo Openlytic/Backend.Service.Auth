@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-config-change.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/lint-on-change.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/track-changes.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/regen-graph.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
