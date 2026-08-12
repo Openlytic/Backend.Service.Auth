@@ -4,17 +4,24 @@
   "description": "JWT-based authentication for Openlytic - TS + TypeORM port of @gainhq/auth",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "author": "Openlytic",
   "license": "MIT",
   "scripts": {
     "prebuild": "pnpm run lint && pnpm run typecheck",
     "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "pnpm run build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --quiet . --ignore-pattern build/ --ignore-pattern dist/",
     "lint-fix": "eslint --quiet . --fix --ignore-pattern build/ --ignore-pattern dist/",
     "format": "prettier . --write",
     "pre-commit": "lint-staged --allow-empty",
     "prepare": "husky"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
