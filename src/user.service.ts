@@ -557,7 +557,7 @@ export const changePasswordByUser = async (
   if (user?.has_temp_password) {
     updatingData.has_temp_password = false
   } else {
-    updatingData.old_passwords = [...user.old_passwords.slice(1, 3), hashPassword]
+    updatingData.old_passwords = [...(user.old_passwords || []).slice(1, 3), hashPassword]
   }
 
   await getRepository('user', transaction).update(user.id, updatingData)
