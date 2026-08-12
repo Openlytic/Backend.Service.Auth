@@ -39,7 +39,7 @@ export const compareHashPassword = (str = '', hashStr?: string | null): boolean 
 }
 
 export const checkOldPasswords = (newPassword: string, oldPasswords: string[] = []): boolean =>
-  oldPasswords.some((password) => compareHashPassword(newPassword, password))
+  (oldPasswords || []).some((password) => compareHashPassword(newPassword, password))
 
 export const generateHashPassword = (str = ''): string => bcrypt.hashSync(str, 10)
 
