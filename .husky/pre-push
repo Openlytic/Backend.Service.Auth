@@ -35,7 +35,7 @@ fi
 
 # - log if ran from terminal
 if [ -t 1 ]; then
-  echo "\n\n${BLUE}Running predefined task(s) from${RESET} ${YELLOW}$(basename "$0")${RESET} ${BLUE}hook. Courtesy: ${RESET} https://linkedin.com/in/emranffl."
+  echo "\n\n${BLUE}Running predefined task(s) from${RESET} ${YELLOW}$(basename "$0")${RESET} ${BLUE}hook. Courtesy: ${RESET} https://linkedin.com/in/md-zihadd."
 
   # log current package manager
   echo "\n${BLUE}Current package manager:${RESET} ${YELLOW}$PACKAGE_MANAGER${RESET}"
