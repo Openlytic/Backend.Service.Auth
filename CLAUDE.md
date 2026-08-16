@@ -18,6 +18,7 @@ pnpm run build              # prebuild (lint + typecheck) then tsc -p tsconfig.b
 
 - **No test framework is configured.** Verify with `pnpm run lint`, `pnpm run typecheck`, `pnpm run build`, and (when touching DB flows) a live smoke test against the API server's Postgres using consumer-defined entities.
 - husky: `pre-commit` runs lint + lint-staged (prettier on staged files); `pre-push` runs build (skippable via `BUILD_ON_PRE_PUSH=false` in `.env`/`.env.local`).
+- **CI:** `.github/workflows/test.yml` (PRs to `master`/`release`) runs gitleaks + `pnpm i --frozen-lockfile` + `pnpm run build`. `.github/workflows/publish.yml` (push to `release`) builds and `pnpm publish`es `@openlytic/auth` to npm (`NPM_TOKEN`). The API server consumes this package via a `file:../Backend.Service.Auth` sibling dependency that CI checks out and builds.
 
 ## Architecture (big picture)
 
